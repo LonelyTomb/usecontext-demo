@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {BrowserRouter, Routes, Route, NavLink} from "react-router-dom";
+import Students from "./Students";
+import AddStudents from "./AddStudents";
+import EditStudent from "./EditStudent";
+import {Provider} from './StudentContext'
+import './App.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App({props}) {
+	return (
+		<Provider>
+			<BrowserRouter>
+				<div>
+					<nav>
+						<NavLink to={'/'}>Students</NavLink>
+						<NavLink to={'/add'}>Add Student</NavLink>
+					</nav>
+				</div>
+				<Routes>
+					<Route path="/" element={<Students/>}/>
+					<Route path="/add" element={<AddStudents/>}/>
+					<Route path="/edit/:id" element={<EditStudent/>}/>
+				</Routes>
+			</BrowserRouter>
+		</Provider>
+	);
 }
-
-export default App;
